@@ -1,12 +1,63 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[sub_resource type="CubeMesh" id=1]
+[ext_resource path="res://Crate.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Spatial
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.0392157, 0.443137, 0.0745098, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( 5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, -5 )
 
 [node name="Spatial" type="Spatial"]
+script = SubResource( 4 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 2 )
 material/0 = null
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 3 )
+
+[node name="Crate" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251429, 0 )
+
+[node name="Crate2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.530732, 0.251429, 0 )
+
+[node name="Crate3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 0.253451, 0.755277, 0.265178 )
+
+[node name="Crate4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.259611, 0, -0.965713, 0, 1, 0, 0.965713, 0, 0.259611, 0.272577, 1.24495, -0.209588 )
+
+[node name="Camera Hub" type="Spatial" parent="."]
+editor/display_folded = true
+
+[node name="Camera" type="Camera" parent="Camera Hub"]
+transform = Transform( -0.575647, 0.374861, -0.726712, 0.175294, 0.92464, 0.338103, 0.798688, 0.0672401, -0.597976, -2.89992, 2.19778, -2.19519 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.439118, -0.632649, -0.637911, 0.819113, -0.00977684, 0.573549, -0.369092, -0.774377, 0.513918, 0.253451, 5.77683, 0.265178 )
+shadow_enabled = true
