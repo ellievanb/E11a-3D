@@ -11,7 +11,7 @@ dest_files=[ "res://.import/blockSnowCornerLarge.glb-ba4545d2d7e11fbc6c5649481b7
 
 [params]
 
-nodes/root_type="Spatial"
+nodes/root_type="StaticBody"
 nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
